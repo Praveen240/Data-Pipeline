@@ -30,7 +30,7 @@ def etl_dag():
 
     def run_producer():
         producer = KafkaProducer(
-            bootstrap_servers=['54.89.154.233:9092'],
+            bootstrap_servers=[],
             value_serializer=lambda x: dumps(x).encode('utf-8')
         )
 
@@ -45,12 +45,12 @@ def etl_dag():
                 break
 
     def run_consumer():
-        bootstrap_servers = ['54.89.154.233:9092']
+        bootstrap_servers = []
         topic_name = 'projectD'
         group_id = 'Praveen_admin'
 
         bucket_name = 'stock-kafka-data'
-        s3_client = boto3.client('s3', aws_access_key_id='AKIAXYKJRR6R3FDZQOFF', aws_secret_access_key='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')
+        s3_client = boto3.client('s3', aws_access_key_id, aws_secret_access_key)
 
         consumer = KafkaConsumer(
             topic_name,
